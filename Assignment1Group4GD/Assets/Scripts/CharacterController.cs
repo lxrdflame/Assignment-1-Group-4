@@ -120,6 +120,7 @@ public class CharacterControls : MonoBehaviour
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                    Text.color = Color.yellow;
                     Text.text = "3";
                 }
             }
