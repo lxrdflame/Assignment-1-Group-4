@@ -21,10 +21,15 @@ public class CharacterControls : MonoBehaviour
     private CharacterController characterController;
     private Vector3 velocity;
     private float gravity = -9.8f;
+    [SerializeField] private float groundedGravity = -0.5f;
+    [SerializeField] private float terminalVelocity = -50f;
     [SerializeField]
     private float lookSpeed;
     private float verticalLookRotation = 0f;
-
+    [SerializeField]
+    private int Range;
+    public GameObject BulletPrefab;
+    public Transform holdingPosition;
 
     //Interaction 
     public LayerMask InteractLayer;
@@ -44,6 +49,7 @@ public class CharacterControls : MonoBehaviour
 
         controls.Player.Interact.performed += ctx => Interact();
         controls.Player.Jump.performed += ctx => Jump();
+        controls.Player.Shoot.performed += ctx => Shoot();
 
 
     }
@@ -70,10 +76,32 @@ public class CharacterControls : MonoBehaviour
         {
         }*/
     }
-    
+
+    void Shoot()
+    {
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+
+
+        if (Physics.Raycast(ray, out hit, Range))
+        {
+            if (hit.collider != null)
+            {
+                GameObject Bullet = Instantiate(BulletPrefab, holdingPosition.position, Quaternion.identity);
+                BulletController controller = Bullet.GetComponent<BulletController>();
+                controller.hitPoint = hit.point;
+            }
+        }
+    }
+
     void Jump()
     {
-
+        Ray ray = new Ray(transform.position, Vector3.down);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 2))
+        {
+            velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
+        }
     }
 
     void Move()
@@ -87,14 +115,18 @@ public class CharacterControls : MonoBehaviour
 
     public void ApplyGravity()
     {
-        if (characterController.isGrounded && velocity.y < 0)
+        if (!characterController.isGrounded)
         {
-            velocity.y = -0.5f; // Small value to keep the player grounded
+            float fallMultiplier = 2.5f;
+            velocity.y += gravity * fallMultiplier * Time.deltaTime;
+            velocity.y = Mathf.Max(velocity.y, terminalVelocity);
         }
-        velocity.y += gravity * Time.deltaTime; // Apply gravity to the velocity
+        else if (velocity.y < 0)
+        {
+            velocity.y = groundedGravity;
+        }
 
-        characterController.Move(velocity * Time.deltaTime); // Apply the velocity to the character
-
+        characterController.Move(velocity * Time.deltaTime);
     }
 
     public void LookAround()
