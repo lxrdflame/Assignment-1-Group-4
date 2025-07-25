@@ -34,7 +34,7 @@ public class CharacterControls : MonoBehaviour
     //Interaction 
     public LayerMask InteractLayer;
     ShootingAniamtionsHandler Animations;
-
+    public GameObject DamagerIndicatorText;
 
 
 
@@ -91,6 +91,7 @@ public class CharacterControls : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Range))
         {
+           
             if (hit.collider != null)
             {
                 StartCoroutine(Animations.ShootAnimation());
@@ -98,6 +99,29 @@ public class CharacterControls : MonoBehaviour
                 GameObject Bullet = Instantiate(BulletPrefab, holdingPosition.position, Quaternion.identity);
                 BulletController controller = Bullet.GetComponent<BulletController>();
                 controller.hitPoint = hit.point;
+
+                if (hit.collider.CompareTag("Head"))
+                {
+                    Transform Enemy = hit.collider.transform.parent;
+                    EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                    HealthSCript.HP -= 6;
+                    GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.rotation = transform.rotation;
+                    Destroy(DamagerText, 1f);
+                    TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                    Text.text = "6";
+                }
+                else if (hit.collider.CompareTag("Body"))
+                {
+                    Transform Enemy = hit.collider.transform.parent;
+                    EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                    HealthSCript.HP -= 3;
+                    GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.rotation = transform.rotation;
+                    Destroy(DamagerText, 1f);
+                    TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                    Text.text = "3";
+                }
             }
         }
     }

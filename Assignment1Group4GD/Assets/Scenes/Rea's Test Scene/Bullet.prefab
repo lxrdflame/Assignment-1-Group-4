@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoint: {x: 0, y: 0, z: 0}
-  MoveSpeed: 130
+  MoveSpeed: 150
 --- !u!1 &7242873374573206550
 GameObject:
   m_ObjectHideFlags: 0
