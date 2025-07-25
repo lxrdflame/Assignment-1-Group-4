@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Carry",
+                    "name": "Reload",
                     "type": "Button",
                     "id": "44c6003e-808f-4982-8539-7fb6f7d1cc13",
                     "expectedControlType": "Button",
@@ -237,28 +237,6 @@
                 },
                 {
                     "name": "",
-                    "id": "bed93ed8-a533-4a54-b272-fb6916ecd3a7",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Carry",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6f84b5ce-6334-4688-b3c7-ddbe149310d6",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Carry",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a1a57fd0-d84c-4582-b30c-c11306dbc30e",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -298,6 +276,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cec81a03-e219-4151-a354-58a67b6b6c58",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

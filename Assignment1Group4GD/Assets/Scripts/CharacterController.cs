@@ -33,9 +33,10 @@ public class CharacterControls : MonoBehaviour
 
     //Interaction 
     public LayerMask InteractLayer;
+    ShootingAniamtionsHandler Animations;
 
 
-    
+
 
     private void OnEnable()
     {
@@ -50,6 +51,7 @@ public class CharacterControls : MonoBehaviour
         controls.Player.Interact.performed += ctx => Interact();
         controls.Player.Jump.performed += ctx => Jump();
         controls.Player.Shoot.performed += ctx => Shoot();
+        controls.Player.Reload.performed += ctx => Reload();
 
 
     }
@@ -66,6 +68,10 @@ public class CharacterControls : MonoBehaviour
         characterController = GetComponent<CharacterController>();
     }
 
+    private void Start()
+    {
+        Animations = GetComponent<ShootingAniamtionsHandler>();
+    }
     void Interact()
     {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
@@ -87,6 +93,8 @@ public class CharacterControls : MonoBehaviour
         {
             if (hit.collider != null)
             {
+                StartCoroutine(Animations.ShootAnimation());
+
                 GameObject Bullet = Instantiate(BulletPrefab, holdingPosition.position, Quaternion.identity);
                 BulletController controller = Bullet.GetComponent<BulletController>();
                 controller.hitPoint = hit.point;
@@ -104,6 +112,10 @@ public class CharacterControls : MonoBehaviour
         }
     }
 
+    void Reload()
+    {
+        StartCoroutine(Animations.ReloadAnimation());
+    }
     void Move()
     {
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
