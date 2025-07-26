@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7123716593608069943}
   - component: {fileID: 3704850170400472464}
   - component: {fileID: 6208905370825739856}
-  - component: {fileID: 3130729230180648841}
+  - component: {fileID: 2348694110748118956}
   m_Layer: 0
   m_Name: Damager Text
   m_TagString: Untagged
@@ -172,24 +172,15 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 3704850170400472464}
   m_maskType: 0
---- !u!95 &3130729230180648841
-Animator:
-  serializedVersion: 5
+--- !u!114 &2348694110748118956
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964196138631459984}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6423fc58700db54418c96703e57bf100, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345fa33bbb528444f9b4db161d5a1a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
