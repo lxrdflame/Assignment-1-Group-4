@@ -11,5 +11,11 @@ public class BulletController : MonoBehaviour
     private void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, hitPoint, MoveSpeed * Time.deltaTime);
+        if (transform.position == hitPoint )
+        {
+            Destroy(gameObject);
+        }
     }
+
+    
 }
