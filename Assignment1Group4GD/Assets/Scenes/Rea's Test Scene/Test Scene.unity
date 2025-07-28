@@ -2663,6 +2663,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: -7612454164442131656, guid: 533e1f2005c7bf44f9bf1705db582e13, type: 3}
+      propertyPath: m_Name
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: -7468221403786207785, guid: 533e1f2005c7bf44f9bf1705db582e13, type: 3}
+      propertyPath: m_Name
+      value: Door
+      objectReference: {fileID: 0}
     - target: {fileID: -7271449666460269675, guid: 533e1f2005c7bf44f9bf1705db582e13, type: 3}
       propertyPath: m_Name
       value: Wall
