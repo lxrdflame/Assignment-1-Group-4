@@ -107,7 +107,6 @@ public class CharacterControls : MonoBehaviour
                     HealthSCript.HP -= 6;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
                     DamagerText.transform.rotation = transform.rotation;
-                    DamagerText.transform.Translate(Vector3.up * 1 * Time.deltaTime);
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
                     Text.text = "6";
@@ -120,7 +119,6 @@ public class CharacterControls : MonoBehaviour
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
-                    DamagerText.transform.Translate(Vector3.up * 1 * Time.deltaTime);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
                     Text.color = Color.yellow;
                     Text.text = "3";

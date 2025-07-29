@@ -2656,6 +2656,10 @@ PrefabInstance:
       value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: -8063382142787465698, guid: 533e1f2005c7bf44f9bf1705db582e13, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f6639d4fa81777447a9af0a7a9e561b1, type: 2}
+    - target: {fileID: -8063382142787465698, guid: 533e1f2005c7bf44f9bf1705db582e13, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: 92780847ef087c740a66a7dabfb039aa, type: 2}
@@ -2727,6 +2731,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 2799821443349691562, guid: 533e1f2005c7bf44f9bf1705db582e13, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f6639d4fa81777447a9af0a7a9e561b1, type: 2}
     - target: {fileID: 2799821443349691562, guid: 533e1f2005c7bf44f9bf1705db582e13, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
