@@ -15,7 +15,7 @@ public class EnemyScript : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(transform.position, Player.transform.position);
-        if (distance <= 10)
+        if (distance <= 15)
         {
             transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 3 * Time.deltaTime);
         }

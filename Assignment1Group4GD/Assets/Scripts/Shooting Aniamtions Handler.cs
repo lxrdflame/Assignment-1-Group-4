@@ -15,6 +15,18 @@ public class ShootingAniamtionsHandler : MonoBehaviour
         NormalGunAnimator.SetBool("Shoot", false);
     }
 
+    public IEnumerator SMGShoot()
+    {
+        NormalGunAnimator.SetBool("SMGShoot", true);
+        yield return new WaitForSeconds(0);
+    }
+
+    public IEnumerator SMGStop()
+    {
+        NormalGunAnimator.SetBool("SMGShoot", false);
+        yield return new WaitForSeconds(0);
+    }
+
     public IEnumerator ReloadAnimation()
     {
         NormalGunAnimator.SetBool("Reload", false);
