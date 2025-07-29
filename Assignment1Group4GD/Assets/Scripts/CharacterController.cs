@@ -30,7 +30,8 @@ public class CharacterControls : MonoBehaviour
     private int Range;
     public GameObject BulletPrefab;
     public Transform holdingPosition;
-
+    [SerializeField]
+    private bool HaveSMG;
     //Interaction 
     public LayerMask InteractLayer;
     ShootingAniamtionsHandler Animations;
@@ -51,6 +52,8 @@ public class CharacterControls : MonoBehaviour
         controls.Player.Interact.performed += ctx => Interact();
         controls.Player.Jump.performed += ctx => Jump();
         controls.Player.Shoot.performed += ctx => Shoot();
+        controls.Player.Shoot.canceled += ctx => CancelShoot();
+
         controls.Player.Reload.performed += ctx => Reload();
 
 
@@ -85,13 +88,64 @@ public class CharacterControls : MonoBehaviour
 
     void Shoot()
     {
+        if (!HaveSMG)
+        {
+            Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+            RaycastHit hit;
+
+
+            if (Physics.Raycast(ray, out hit, Range))
+            {
+
+                if (hit.collider != null)
+                {
+                    StartCoroutine(Animations.ShootAnimation());
+
+                    GameObject Bullet = Instantiate(BulletPrefab, holdingPosition.position, Quaternion.identity);
+                    BulletController controller = Bullet.GetComponent<BulletController>();
+                    controller.hitPoint = hit.point;
+
+                    if (hit.collider.CompareTag("Head"))
+                    {
+                        Transform Enemy = hit.collider.transform.parent;
+                        EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                        HealthSCript.HP -= 6;
+                        GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                        DamagerText.transform.rotation = transform.rotation;
+                        Destroy(DamagerText, 1f);
+                        TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                        Text.text = "6";
+                    }
+                    else if (hit.collider.CompareTag("Body"))
+                    {
+                        Transform Enemy = hit.collider.transform.parent;
+                        EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                        HealthSCript.HP -= 3;
+                        GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                        DamagerText.transform.rotation = transform.rotation;
+                        Destroy(DamagerText, 1f);
+                        TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                        Text.color = Color.yellow;
+                        Text.text = "3";
+                    }
+                }
+            }
+        }
+        else if (HaveSMG)
+        {
+            StartCoroutine(SMGSHoot());
+        }
+    }
+
+    IEnumerator SMGSHoot()
+    {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
 
 
         if (Physics.Raycast(ray, out hit, Range))
         {
-           
+
             if (hit.collider != null)
             {
                 StartCoroutine(Animations.ShootAnimation());
@@ -125,6 +179,51 @@ public class CharacterControls : MonoBehaviour
                 }
             }
         }
+        yield return new WaitForSeconds(0.2f);
+
+        if (Physics.Raycast(ray, out hit, Range))
+        {
+
+            if (hit.collider != null)
+            {
+                StartCoroutine(Animations.ShootAnimation());
+
+                GameObject Bullet = Instantiate(BulletPrefab, holdingPosition.position, Quaternion.identity);
+                BulletController controller = Bullet.GetComponent<BulletController>();
+                controller.hitPoint = hit.point;
+
+                if (hit.collider.CompareTag("Head"))
+                {
+                    Transform Enemy = hit.collider.transform.parent;
+                    EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                    HealthSCript.HP -= 6;
+                    GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.rotation = transform.rotation;
+                    Destroy(DamagerText, 1f);
+                    TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                    Text.text = "6";
+                }
+                else if (hit.collider.CompareTag("Body"))
+                {
+                    Transform Enemy = hit.collider.transform.parent;
+                    EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                    HealthSCript.HP -= 3;
+                    GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.rotation = transform.rotation;
+                    Destroy(DamagerText, 1f);
+                    TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                    Text.color = Color.yellow;
+                    Text.text = "3";
+                }
+            }
+        }
+        yield return new WaitForSeconds(0.2f);
+
+        StartCoroutine(SMGSHoot());
+    }
+    void CancelShoot()
+    {
+        StopAllCoroutines();
     }
 
     void Jump()
