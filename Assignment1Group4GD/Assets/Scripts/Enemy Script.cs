@@ -6,6 +6,8 @@ public class EnemyScript : MonoBehaviour
 {
     public int HP;
     public GameObject Player;
+    [SerializeField]
+    private int Speed;
 
     private void Start()
     {
@@ -14,11 +16,10 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
-        float distance = Vector3.Distance(transform.position, Player.transform.position);
-        if (distance <= 15)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 3 * Time.deltaTime);
-        }
+        
+        transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, Speed * Time.deltaTime);
+        transform.LookAt(Player.transform.position);
+        
         if (HP <= 0)
         {
             Destroy(gameObject);

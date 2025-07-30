@@ -112,6 +112,7 @@ public class CharacterControls : MonoBehaviour
                     EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
                     HealthSCript.HP -= 6;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.SetParent(hit.collider.gameObject.transform);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
@@ -123,6 +124,7 @@ public class CharacterControls : MonoBehaviour
                     EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
                     HealthSCript.HP -= 3;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.SetParent( hit.collider.gameObject.transform);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();

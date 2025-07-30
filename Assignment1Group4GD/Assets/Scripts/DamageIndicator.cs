@@ -7,6 +7,6 @@ public class DamageIndicator : MonoBehaviour
 
     void Update()
     {
-      transform.Translate(Vector3.up * 2.5f * Time.deltaTime);
+      transform.Translate(Vector3.up * 6 * Time.deltaTime);
     }
 }
