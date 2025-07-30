@@ -35,7 +35,9 @@ public class CharacterControls : MonoBehaviour
     ShootingAniamtionsHandler Animations;
     public GameObject DamagerIndicatorText;
 
-
+    //Gun Settings
+    private bool HasMachineGun, HasSMG, HasRocketLauncher, HasLaserGun;
+    public Transform MachineGunPoint;
 
     private void OnEnable()
     {
@@ -51,8 +53,6 @@ public class CharacterControls : MonoBehaviour
         controls.Player.Jump.performed += ctx => Jump();
         controls.Player.Shoot.performed += ctx => Shoot();
         controls.Player.Shoot.canceled += ctx => CancelShoot();
-
-        controls.Player.Reload.performed += ctx => Reload();
 
 
     }
@@ -75,8 +75,8 @@ public class CharacterControls : MonoBehaviour
     }
     void Interact()
     {
-        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
-        RaycastHit hit;
+       // Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        //RaycastHit hit;
 
 
         /*if (Physics.Raycast(ray, out hit, PickupRange, InteractLayer))
@@ -88,6 +88,54 @@ public class CharacterControls : MonoBehaviour
     {
         StartCoroutine(Animations.SMGShoot());
         StartCoroutine(SMGSHoot());
+        StartCoroutine(MachineGunShoot());
+    }
+
+    IEnumerator MachineGunShoot()
+    {
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+
+
+        if (Physics.Raycast(ray, out hit, Range))
+        {
+
+            if (hit.collider != null)
+            {
+
+                GameObject Bullet = Instantiate(BulletPrefab, MachineGunPoint.position, Quaternion.identity);
+                BulletController controller = Bullet.GetComponent<BulletController>();
+                controller.hitPoint = hit.point;
+
+                if (hit.collider.CompareTag("Head"))
+                {
+                    Transform Enemy = hit.collider.transform.parent;
+                    EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                    HealthSCript.HP -= 6;
+                    GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.SetParent(hit.collider.gameObject.transform);
+                    DamagerText.transform.rotation = transform.rotation;
+                    Destroy(DamagerText, 1f);
+                    TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                    Text.text = "6";
+                }
+                else if (hit.collider.CompareTag("Body"))
+                {
+                    Transform Enemy = hit.collider.transform.parent;
+                    EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                    HealthSCript.HP -= 3;
+                    GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.SetParent(hit.collider.gameObject.transform);
+                    DamagerText.transform.rotation = transform.rotation;
+                    Destroy(DamagerText, 1f);
+                    TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                    Text.color = Color.yellow;
+                    Text.text = "3";
+                }
+            }
+        }
+        yield return new WaitForSeconds(0.05f);
+        StartCoroutine(MachineGunShoot());
     }
 
     IEnumerator SMGSHoot()
@@ -153,10 +201,7 @@ public class CharacterControls : MonoBehaviour
         }
     }
 
-    void Reload()
-    {
-        StartCoroutine(Animations.ReloadAnimation());
-    }
+
     void Move()
     {
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);

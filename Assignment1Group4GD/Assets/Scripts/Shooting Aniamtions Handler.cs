@@ -5,33 +5,21 @@ using UnityEngine;
 
 public class ShootingAniamtionsHandler : MonoBehaviour
 {
-    public Animator NormalGunAnimator;
-
-    public IEnumerator ShootAnimation()
-    {
-        NormalGunAnimator.SetBool("Shoot", false);
-        NormalGunAnimator.SetBool("Shoot", true);
-        yield return new WaitForSeconds(0.3f);
-        NormalGunAnimator.SetBool("Shoot", false);
-    }
+    public Animator NormalGunAnimator, MachineGunRevolve;
 
     public IEnumerator SMGShoot()
     {
         NormalGunAnimator.SetBool("SMGShoot", true);
+        MachineGunRevolve.SetBool("Revolve", true);
         yield return new WaitForSeconds(0);
     }
 
     public IEnumerator SMGStop()
     {
         NormalGunAnimator.SetBool("SMGShoot", false);
+        MachineGunRevolve.SetBool("Revolve", false );
         yield return new WaitForSeconds(0);
+
     }
 
-    public IEnumerator ReloadAnimation()
-    {
-        NormalGunAnimator.SetBool("Reload", false);
-        NormalGunAnimator.SetBool("Reload", true);
-        yield return new WaitForSeconds(1.1f);
-        NormalGunAnimator.SetBool("Reload", false);
-    }
 }

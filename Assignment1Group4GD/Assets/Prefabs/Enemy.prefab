@@ -77,6 +77,7 @@ MonoBehaviour:
   HP: 20
   Player: {fileID: 0}
   Speed: 8
+  Orb: {fileID: 2510824834110919357, guid: 5fe9375557c3bef4c81cad3cc94fc6d9, type: 3}
 --- !u!1 &3227631913208451341
 GameObject:
   m_ObjectHideFlags: 0

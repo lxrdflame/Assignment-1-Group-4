@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject Player;
     [SerializeField]
     private int Speed;
+    public GameObject Orb;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class EnemyScript : MonoBehaviour
         
         if (HP <= 0)
         {
+            Instantiate(Orb, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
