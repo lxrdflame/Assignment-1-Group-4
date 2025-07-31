@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e95681ad921e3147bcc1034954861b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 20
+  HP: 120
   Player: {fileID: 0}
   Speed: 8
   Orb: {fileID: 2510824834110919357, guid: 5fe9375557c3bef4c81cad3cc94fc6d9, type: 3}

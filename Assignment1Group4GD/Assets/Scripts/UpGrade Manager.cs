@@ -4,15 +4,41 @@ using UnityEngine;
 
 public class UpGradeManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void SpeedUpgrade()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DashUpgrade()
     {
-        
+
+    }
+
+    public void DamageUpgrade()
+    {
+
+    }
+
+
+
+    public void GetSMG()
+    {
+
+    }
+
+    public void GetBazooka()
+    {
+
+    }
+
+    public void GetMachineGun()
+    {
+
+    }
+
+    public void GetLazerShooter()
+    {
+
     }
 }
+

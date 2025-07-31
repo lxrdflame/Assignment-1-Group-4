@@ -37,7 +37,8 @@ public class CharacterControls : MonoBehaviour
 
     //Gun Settings
     private bool HasMachineGun, HasSMG, HasRocketLauncher, HasLaserGun;
-    public Transform MachineGunPoint;
+    public Transform MachineGunPoint, BazookaGunPoint;
+    public GameObject BazookaBullet;
 
     private void OnEnable()
     {
@@ -89,6 +90,7 @@ public class CharacterControls : MonoBehaviour
         StartCoroutine(Animations.SMGShoot());
         StartCoroutine(SMGSHoot());
         StartCoroutine(MachineGunShoot());
+        StartCoroutine(BazookaShoot());
     }
 
     IEnumerator MachineGunShoot()
@@ -137,6 +139,56 @@ public class CharacterControls : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         StartCoroutine(MachineGunShoot());
     }
+
+    IEnumerator BazookaShoot()
+    {
+        yield return new WaitForSeconds(1.1f);
+
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+
+
+        if (Physics.Raycast(ray, out hit, Range))
+        {
+
+            if (hit.collider != null)
+            {
+                GameObject Bullet = Instantiate(BazookaBullet, BazookaGunPoint.position, Quaternion.identity);
+                BulletController controller = Bullet.GetComponent<BulletController>();
+                controller.hitPoint = hit.point;
+
+                if (hit.collider.CompareTag("Head"))
+                {
+                    Transform Enemy = hit.collider.transform.parent;
+                    EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                    HealthSCript.HP -= 30;
+                    GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.SetParent(hit.collider.gameObject.transform);
+                    DamagerText.transform.rotation = transform.rotation;
+                    Destroy(DamagerText, 1f);
+                    TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                    Text.text = "30";
+                }
+                else if (hit.collider.CompareTag("Body"))
+                {
+                    Transform Enemy = hit.collider.transform.parent;
+                    EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
+                    HealthSCript.HP -= 15;
+                    GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
+                    DamagerText.transform.SetParent(hit.collider.gameObject.transform);
+                    DamagerText.transform.rotation = transform.rotation;
+                    Destroy(DamagerText, 1f);
+                    TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
+                    Text.color = Color.yellow;
+                    Text.text = "15";
+                }
+            }
+        }
+        yield return new WaitForSeconds(2.4f);
+
+        StartCoroutine(BazookaShoot());
+    }
+
 
     IEnumerator SMGSHoot()
     {
