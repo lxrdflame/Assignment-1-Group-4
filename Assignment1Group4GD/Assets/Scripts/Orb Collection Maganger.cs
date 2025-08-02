@@ -7,15 +7,18 @@ public class OrbCollectionMaganger : MonoBehaviour
 {
     public Slider OrbCollections;
     private int OrbsCollected;
+    private int orbscollectedMax = 15; //Delete if needed
     public GameObject UpgradePanel;
 
     private void Update()
     {
         OrbCollections.value = OrbsCollected;
-        if (OrbsCollected == 15)
+        OrbCollections.maxValue = orbscollectedMax; // delete if needed
+        if (OrbsCollected == orbscollectedMax)
         {
             Time.timeScale = 0;
-            OrbsCollected -= 15;
+            orbscollectedMax += 15; // change to orbscollected -= 15 if game is not working;
+            OrbsCollected -= orbscollectedMax; // Delete if necessary
             UpgradePanel.SetActive(true);
         }
     }
