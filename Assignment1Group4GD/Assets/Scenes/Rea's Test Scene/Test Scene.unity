@@ -7724,13 +7724,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b5376ea44d8364f867abf8d1e58966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 12
-  JumpHeight: 6
+  moveSpeed: 15
+  JumpHeight: 8
   playerCamera: {fileID: 1812080170}
   moveInput: {x: 0, y: 0}
   groundedGravity: -0.5
   terminalVelocity: -40
-  lookSpeed: 0.1
+  lookSpeed: 0.5
   Range: 100
   BulletPrefab: {fileID: 1584507885093090616, guid: 372bff5b689571844b7737b90dc828a7, type: 3}
   holdingPosition: {fileID: 863703178}

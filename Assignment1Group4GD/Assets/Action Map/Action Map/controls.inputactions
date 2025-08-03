@@ -183,21 +183,10 @@
                 {
                     "name": "",
                     "id": "0c496a19-b416-4ade-94b5-29a34ddabfa0",
-                    "path": "<Gamepad>/leftStick",
+                    "path": "<XInputController>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d400ec6c-9f16-4810-a560-b97fc36a3882",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -237,6 +226,17 @@
                 },
                 {
                     "name": "",
+                    "id": "3243d1a8-91ee-4fda-956f-b47d5c6da777",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a1a57fd0-d84c-4582-b30c-c11306dbc30e",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -270,9 +270,31 @@
                 },
                 {
                     "name": "",
+                    "id": "0a523110-7bd8-4336-9ea7-3a22fde96a5e",
+                    "path": "<XInputController>/start",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1c015a42-865f-4e66-a424-4b6be90832a1",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fca51ef7-a3ba-4561-807a-10fa320918ce",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",

@@ -17,8 +17,8 @@ public class OrbCollectionMaganger : MonoBehaviour
         if (OrbsCollected == orbscollectedMax)
         {
             Time.timeScale = 0;
-            orbscollectedMax += 15; // change to orbscollected -= 15 if game is not working;
             OrbsCollected -= orbscollectedMax; // Delete if necessary
+            orbscollectedMax += 15; // change to orbscollected -= 15 if game is not working;
             UpgradePanel.SetActive(true);
         }
     }
