@@ -10,6 +10,9 @@ public class OrbCollectionMaganger : MonoBehaviour
     private int orbscollectedMax = 15; //Delete if needed
     public GameObject UpgradePanel;
 
+    [SerializeField] private UIManager uiManager; // can delete
+    
+
     private void Update()
     {
         OrbCollections.value = OrbsCollected;
@@ -19,6 +22,7 @@ public class OrbCollectionMaganger : MonoBehaviour
             Time.timeScale = 0;
             OrbsCollected -= orbscollectedMax; // Delete if necessary
             orbscollectedMax += 15; // change to orbscollected -= 15 if game is not working;
+            uiManager.OpenUpgradeMenu();
             UpgradePanel.SetActive(true);
         }
     }
