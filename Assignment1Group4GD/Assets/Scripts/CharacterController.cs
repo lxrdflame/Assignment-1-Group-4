@@ -35,6 +35,7 @@ public class CharacterControls : MonoBehaviour
     ShootingAniamtionsHandler Animations;
     public GameObject DamagerIndicatorText;
 
+    [SerializeField]
     private PlayerStats stats;
 
 
