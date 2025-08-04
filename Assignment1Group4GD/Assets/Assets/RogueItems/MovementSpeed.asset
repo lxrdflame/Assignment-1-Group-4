@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1faa9eab1b362434e86254364df6c2af, type: 3}
-  m_Name: LevelUp
+  m_Name: MovementSpeed
   m_EditorClassIdentifier: 
-  itemName: LevelUP
-  description: Increases Health and Attack
-  itemPrefab: {fileID: 2301816195654891231, guid: 2d3814a03063b3243bf98020f827af9a, type: 3}
-  itemSprite: {fileID: 21300000, guid: cf64802c81793409ea46da5270a547e8, type: 3}
+  itemName: Budget Sandevistan
+  description: Movemnet Speed Increases +2
+  itemPrefab: {fileID: 5190778980363954488, guid: 2884b92e57ebfa040bb9e8ce21605427, type: 3}
+  itemSprite: {fileID: 21300000, guid: c64ef67cefbe2754e8d72c6310f45794, type: 3}
+  modifiesStats: 1
+  statToModify: 3
+  statValue: 2

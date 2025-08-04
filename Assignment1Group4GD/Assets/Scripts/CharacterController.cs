@@ -118,30 +118,30 @@ public class CharacterControls : MonoBehaviour
                 {
                     Transform Enemy = hit.collider.transform.parent;
                     EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
-                    HealthSCript.HP -= 6;
+                    HealthSCript.HP -= 6 + stats.baseDamage;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
                     DamagerText.transform.SetParent(hit.collider.gameObject.transform);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
-                    Text.text = "6";
+                    Text.text = $"{6 + stats.baseDamage}";
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {
                     Transform Enemy = hit.collider.transform.parent;
                     EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
-                    HealthSCript.HP -= 3;
+                    HealthSCript.HP -= 3 + stats.baseDamage;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
                     DamagerText.transform.SetParent(hit.collider.gameObject.transform);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
                     Text.color = Color.yellow;
-                    Text.text = "3";
+                    Text.text = $"{3 + stats.baseDamage}";
                 }
             }
         }
-        yield return new WaitForSeconds(0.05f );
+        yield return new WaitForSeconds(0.05f/stats.fireRate);
         StartCoroutine(MachineGunShoot());
     }
 
@@ -166,30 +166,30 @@ public class CharacterControls : MonoBehaviour
                 {
                     Transform Enemy = hit.collider.transform.parent;
                     EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
-                    HealthSCript.HP -= 30;
+                    HealthSCript.HP -= 30 + stats.baseDamage;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
                     DamagerText.transform.SetParent(hit.collider.gameObject.transform);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
-                    Text.text = "30";
+                    Text.text = $"{30 + stats.baseDamage}";
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {
                     Transform Enemy = hit.collider.transform.parent;
                     EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
-                    HealthSCript.HP -= 15;
+                    HealthSCript.HP -= 15 + stats.baseDamage;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
                     DamagerText.transform.SetParent(hit.collider.gameObject.transform);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
                     Text.color = Color.yellow;
-                    Text.text = "15";
+                    Text.text = $"{15 + stats.baseDamage}";
                 }
             }
         }
-        yield return new WaitForSeconds(2.4f);
+        yield return new WaitForSeconds(2.4f/stats.fireRate);
 
         StartCoroutine(BazookaShoot());
     }
@@ -215,30 +215,30 @@ public class CharacterControls : MonoBehaviour
                 {
                     Transform Enemy = hit.collider.transform.parent;
                     EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
-                    HealthSCript.HP -= 6;
+                    HealthSCript.HP -= 6 + stats.baseDamage;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
                     DamagerText.transform.SetParent(hit.collider.gameObject.transform);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
-                    Text.text = "6";
+                    Text.text = $"{6 + stats.baseDamage}";
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {
                     Transform Enemy = hit.collider.transform.parent;
                     EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
-                    HealthSCript.HP -= 3;
+                    HealthSCript.HP -= 3 + stats.baseDamage;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
                     DamagerText.transform.SetParent( hit.collider.gameObject.transform);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
                     Text.color = Color.yellow;
-                    Text.text = "3";
+                    Text.text = $"{3 + stats.baseDamage}";
                 }
             }
         }
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f/stats.fireRate);
         StartCoroutine(SMGSHoot());
     }
     void CancelShoot()

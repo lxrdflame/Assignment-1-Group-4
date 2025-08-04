@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1faa9eab1b362434e86254364df6c2af, type: 3}
-  m_Name: RocketLauncher
+  m_Name: Gravity
   m_EditorClassIdentifier: 
-  itemName: RPG
-  description: fires a missle doing massive damage, but has a slow reload
-  itemPrefab: {fileID: 158143332393739054, guid: fd32f6fbea4c6af448b23cb8f4fee89f, type: 3}
-  itemSprite: {fileID: 1027197072, guid: 76c598e89f3ae9146a2d73b3392bab12, type: 3}
+  itemName: Almost Zero Gs
+  description: Decreases decent speed after jumping
+  itemPrefab: {fileID: 7841233447191727685, guid: 40c636bfdea25f6459de9cbd5c8c26bc, type: 3}
+  itemSprite: {fileID: 21300000, guid: 2a3574b90ca6ed3419f86749ba7c43d8, type: 3}
+  modifiesStats: 1
+  statToModify: 5
+  statValue: -1.5

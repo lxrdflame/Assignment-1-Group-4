@@ -8236,8 +8236,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  baseDamage: 10
-  fireRate: 0.2
+  baseDamage: 0
+  fireRate: 1
   moveSpeed: 15
   jumpHeight: 6
   descentMultiplier: 2.5

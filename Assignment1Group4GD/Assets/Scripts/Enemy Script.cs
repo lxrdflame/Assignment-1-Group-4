@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-    public int HP;
+    public float HP;
 
     
     public GameObject Player;
