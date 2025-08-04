@@ -35,6 +35,9 @@ public class CharacterControls : MonoBehaviour
     ShootingAniamtionsHandler Animations;
     public GameObject DamagerIndicatorText;
 
+    private PlayerStats stats;
+
+
     //Gun Settings
     private bool HasMachineGun, HasSMG, HasRocketLauncher, HasLaserGun;
     public Transform MachineGunPoint, BazookaGunPoint;
@@ -68,6 +71,7 @@ public class CharacterControls : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        stats = GetComponent<PlayerStats>();
     }
 
     private void Start()
@@ -249,7 +253,8 @@ public class CharacterControls : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 2))
         {
-            velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
+           velocity.y = Mathf.Sqrt(stats.jumpHeight * -2f * gravity);
+
         }
     }
 
@@ -260,15 +265,17 @@ public class CharacterControls : MonoBehaviour
 
         move = transform.TransformDirection(move);
 
-        characterController.Move(move * moveSpeed * Time.deltaTime);
+        characterController.Move(move * stats.moveSpeed * Time.deltaTime);
+
     }
 
     public void ApplyGravity()
     {
         if (!characterController.isGrounded)
         {
-            float fallMultiplier = 2.5f;
-            velocity.y += gravity * fallMultiplier * Time.deltaTime;
+            //float fallMultiplier = 2.5f;
+            velocity.y += gravity * stats.descentMultiplier * Time.deltaTime;
+
             velocity.y = Mathf.Max(velocity.y, terminalVelocity);
         }
         else if (velocity.y < 0)
