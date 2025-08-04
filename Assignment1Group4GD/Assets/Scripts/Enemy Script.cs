@@ -10,11 +10,9 @@ public class EnemyScript : MonoBehaviour
     
     public GameObject Player;
     [SerializeField]
-    private int Speed;
     private NavMeshAgent agent;
 
 
-    public int AmountofOrbs; // can delete
     public GameObject Orb;
 
     
@@ -31,7 +29,6 @@ public class EnemyScript : MonoBehaviour
         if (agent != null)
         {
             agent.SetDestination(Player.transform.position);
-            agent.stoppingDistance = 0.1f;
         }
 
         if (HP <= 0)

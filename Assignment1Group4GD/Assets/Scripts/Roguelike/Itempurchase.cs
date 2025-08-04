@@ -9,8 +9,6 @@ public class Itempurchase : MonoBehaviour
     private Rogueitems itemInfo;
     [SerializeField] private Image itemSprite;
     [SerializeField] private TextMeshProUGUI itemText;
-    
-
     public Transform spawnPoint;
 
     public void Initialize(Rogueitems newItem, Transform spawn)
