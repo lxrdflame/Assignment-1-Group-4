@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -10,8 +11,9 @@ public class EnemyScript : MonoBehaviour
     public GameObject Player;
     [SerializeField]
     private int Speed;
+    private NavMeshAgent agent;
 
-    
+
     public int AmountofOrbs; // can delete
     public GameObject Orb;
 
@@ -20,14 +22,18 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
-        
-        transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, Speed * Time.deltaTime);
-        transform.LookAt(Player.transform.position);
-        
+
+        if (agent != null)
+        {
+            agent.SetDestination(Player.transform.position);
+            agent.stoppingDistance = 0.1f;
+        }
+
         if (HP <= 0)
         {
             Instantiate(Orb, transform.position, Quaternion.identity);
