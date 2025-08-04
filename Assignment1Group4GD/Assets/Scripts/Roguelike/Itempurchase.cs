@@ -28,39 +28,6 @@ public class Itempurchase : MonoBehaviour
 
     public void BuyItem()
     {
-            if (itemInfo == null) return;
-
-    // Apply stat changes
-    if (itemInfo.modifiesStats && itemInfo.statToModify != Rogueitems.StatType.None)
-    {
-        PlayerStats stats = FindObjectOfType<PlayerStats>();
-        if (stats != null)
-        {
-            switch (itemInfo.statToModify)
-            {
-                case Rogueitems.StatType.Damage:
-                    stats.ModifyStat("damage", itemInfo.statValue);
-                    break;
-                case Rogueitems.StatType.FireRate:
-                    stats.ModifyStat("firerate", -itemInfo.statValue); // lower = faster
-                    stats.fireRate = Mathf.Max(0.05f, stats.fireRate);
-                    break;
-                case Rogueitems.StatType.MoveSpeed:
-                    stats.ModifyStat("movespeed", itemInfo.statValue);
-                    break;
-                case Rogueitems.StatType.JumpHeight:
-                    stats.ModifyStat("jumpheight", itemInfo.statValue);
-                    break;
-                case Rogueitems.StatType.DescentSpeed:
-                    stats.ModifyStat("descent", itemInfo.statValue);
-                    break;
-                case Rogueitems.StatType.MaxHealth:
-                    stats.maxHealth += itemInfo.statValue;
-                    stats.currentHealth += itemInfo.statValue;
-                    break;
-            }
-        }
-    }
         if (itemInfo != null && itemInfo.itemPrefab != null)
         {
             Instantiate(itemInfo.itemPrefab, spawnPoint.position, spawnPoint.rotation);
