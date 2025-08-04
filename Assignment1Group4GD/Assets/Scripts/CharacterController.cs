@@ -141,7 +141,7 @@ public class CharacterControls : MonoBehaviour
                 }
             }
         }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.05f );
         StartCoroutine(MachineGunShoot());
     }
 
