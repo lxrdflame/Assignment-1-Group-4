@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class OrbCollectionMaganger : MonoBehaviour
 {
     public Slider OrbCollections;
+    [SerializeField]
     private int OrbsCollected;
     private int orbscollectedMax = 15; //Delete if needed
     public GameObject UpgradePanel;

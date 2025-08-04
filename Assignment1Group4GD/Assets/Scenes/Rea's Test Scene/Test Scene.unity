@@ -7998,6 +7998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OrbCollections: {fileID: 257519390}
+  OrbsCollected: 0
   UpgradePanel: {fileID: 1639544893}
   uiManager: {fileID: 70618015}
 --- !u!114 &735451907

@@ -8,7 +8,6 @@ public class EnemyScript : MonoBehaviour
 
     
     public GameObject Player;
-    private CurrencyManager orbs;
     [SerializeField]
     private int Speed;
 
@@ -32,11 +31,6 @@ public class EnemyScript : MonoBehaviour
         if (HP <= 0)
         {
             Instantiate(Orb, transform.position, Quaternion.identity);
-            if (orbs != null)
-            {
-                orbs.AddCurrency(AmountofOrbs);
-            }
-
             Destroy(gameObject);
         }
     }
