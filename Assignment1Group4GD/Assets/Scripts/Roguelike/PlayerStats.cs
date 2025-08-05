@@ -49,7 +49,7 @@ public class PlayerStats : MonoBehaviour
         switch (statName.ToLower())
         {
             case "damage": baseDamage += amount; break;
-            case "firerate": fireRate += amount; break;
+            case "firerate": fireRate -= amount; break;
             case "movespeed": moveSpeed += amount; break;
             case "jumpheight": jumpHeight += amount; break;
             case "descent": descentMultiplier += amount; break;
