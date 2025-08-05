@@ -11,7 +11,7 @@ public class HealthManager : MonoBehaviour
 
     private void Update()
     {
-        //HealthSlider.value = Health;
+        HealthSlider.value = Health;
     }
 
     private void OnTriggerEnter(Collider hit)
@@ -22,6 +22,10 @@ public class HealthManager : MonoBehaviour
             Destroy(hit.gameObject);
             GameObject ExplotionParticle = Instantiate(Explotion, hit.transform.position, Quaternion.identity);
             Destroy(ExplotionParticle, 3);
+        }
+        else if (hit.CompareTag("EnemyBullet"))
+        {
+            Health -= 5;
         }
     }
 }

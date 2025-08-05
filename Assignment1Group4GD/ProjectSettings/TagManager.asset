@@ -8,6 +8,7 @@ TagManager:
   - Body
   - Orb
   - WalkingEnemy
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
