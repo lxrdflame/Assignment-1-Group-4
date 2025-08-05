@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(SpawnRate);
         }
 
-        yield return new WaitForSeconds(300);
+        yield return new WaitForSeconds(10);
         for (int L = 0; L < EnemiesToSpawn; L ++)
         {
             GameObject enemy = Instantiate(Enemies[Random.Range(1, 2)], SpawnPoints[Random.Range(0, SpawnPoints.Count)].position, Quaternion.identity);

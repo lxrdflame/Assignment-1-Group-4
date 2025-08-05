@@ -141,6 +141,8 @@ public class CharacterControls : MonoBehaviour
         lineRenderer.endWidth = 0.3f;
         lineRenderer.enabled = false;
         lineRenderer.positionCount = 2; // Need 2 points for a line
+        isShooting = false;
+
     }
 
 
@@ -370,6 +372,7 @@ public class CharacterControls : MonoBehaviour
         StartCoroutine(Animations.SMGStop());
         canShoot = false;
         lineRenderer.enabled = false;
+        isShooting = false;
     }
 
     void Jump()
