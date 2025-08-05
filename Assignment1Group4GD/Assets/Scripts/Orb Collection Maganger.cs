@@ -22,7 +22,10 @@ public class OrbCollectionMaganger : MonoBehaviour
         {
             Time.timeScale = 0;
             OrbsCollected -= orbscollectedMax; // Delete if necessary
-            orbscollectedMax += 15; // change to orbscollected -= 15 if game is not working;
+            if(orbscollectedMax != 30)
+            {
+                orbscollectedMax += 15; // change to orbscollected -= 15 if game is not working;
+            }
             uiManager.OpenUpgradeMenu();
             UpgradePanel.SetActive(true);
             UpgradePanel2.SetActive(true);
