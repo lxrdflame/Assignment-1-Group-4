@@ -19,7 +19,11 @@ public class Rogueitems : ScriptableObject
         MoveSpeed,
         JumpHeight,
         DescentSpeed,
-        MaxHealth
+        MaxHealth,
+        MachineGun,
+        Bazooka,
+        LaserGun
+
     }
 
     public StatType statToModify = StatType.None;

@@ -16,6 +16,6 @@ MonoBehaviour:
   description: 
   itemPrefab: {fileID: 0}
   itemSprite: {fileID: 0}
-  modifiesStats: 0
-  statToModify: 0
+  modifiesStats: 1
+  statToModify: 9
   statValue: 0

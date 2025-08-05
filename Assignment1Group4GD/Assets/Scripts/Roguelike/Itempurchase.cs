@@ -10,6 +10,9 @@ public class Itempurchase : MonoBehaviour
     [SerializeField] private Image itemSprite;
     [SerializeField] private TextMeshProUGUI itemText;
     public Transform spawnPoint;
+    public GameObject Bazooka, MachineGun, LazerGun;
+    public CharacterControls ControllsScript;
+    
 
     public void Initialize(Rogueitems newItem, Transform spawn)
     {
@@ -24,44 +27,53 @@ public class Itempurchase : MonoBehaviour
             itemSprite.sprite = itemInfo.itemSprite;
         }
 
-     }
+    }
 
     public void BuyItem()
     {
 
-            if (itemInfo == null) return;
+        if (itemInfo == null) return;
 
-    // Apply stat changes
-    if (itemInfo.modifiesStats && itemInfo.statToModify != Rogueitems.StatType.None)
-    {
-        PlayerStats stats = FindObjectOfType<PlayerStats>();
-        if (stats != null)
+        // Apply stat changes
+        if (itemInfo.modifiesStats && itemInfo.statToModify != Rogueitems.StatType.None)
         {
-            switch (itemInfo.statToModify)
+            PlayerStats stats = FindObjectOfType<PlayerStats>();
+            if (stats != null)
             {
-                case Rogueitems.StatType.Damage:
-                    stats.ModifyStat("damage", itemInfo.statValue);
-                    break;
-                case Rogueitems.StatType.FireRate:
-                    stats.ModifyStat("firerate", -itemInfo.statValue); // lower = faster
-                    stats.fireRate = Mathf.Max(0.05f, stats.fireRate);
-                    break;
-                case Rogueitems.StatType.MoveSpeed:
-                    stats.ModifyStat("movespeed", itemInfo.statValue);
-                    break;
-                case Rogueitems.StatType.JumpHeight:
-                    stats.ModifyStat("jumpheight", itemInfo.statValue);
-                    break;
-                case Rogueitems.StatType.DescentSpeed:
-                    stats.ModifyStat("descent", itemInfo.statValue);
-                    break;
-                case Rogueitems.StatType.MaxHealth:
-                    stats.maxHealth += itemInfo.statValue;
-                    stats.currentHealth += itemInfo.statValue;
-                    break;
+                switch (itemInfo.statToModify)
+                {
+                    case Rogueitems.StatType.Damage:
+                        stats.ModifyStat("damage", itemInfo.statValue);
+                        break;
+                    case Rogueitems.StatType.FireRate:
+                        stats.ModifyStat("firerate", -itemInfo.statValue); // lower = faster
+                        stats.fireRate = Mathf.Max(0.05f, stats.fireRate);
+                        break;
+                    case Rogueitems.StatType.MoveSpeed:
+                        stats.ModifyStat("movespeed", itemInfo.statValue);
+                        break;
+                    case Rogueitems.StatType.JumpHeight:
+                        stats.ModifyStat("jumpheight", itemInfo.statValue);
+                        break;
+                    case Rogueitems.StatType.DescentSpeed:
+                        stats.ModifyStat("descent", itemInfo.statValue);
+                        break;
+                    case Rogueitems.StatType.MaxHealth:
+                        stats.maxHealth += itemInfo.statValue;
+                        stats.currentHealth += itemInfo.statValue;
+                        break;
+                    case Rogueitems.StatType.Bazooka:
+                        GetBazooka();
+                        break;
+                    case Rogueitems.StatType.MachineGun:
+                        GetMachineGun();
+                        break;
+                    case Rogueitems.StatType.LaserGun:
+                        GetLaserGun();
+                        break;
+                }
             }
         }
-    }
         if (itemInfo != null && itemInfo.itemPrefab != null)
         {
             Instantiate(itemInfo.itemPrefab, spawnPoint.position, spawnPoint.rotation);
@@ -71,5 +83,23 @@ public class Itempurchase : MonoBehaviour
         {
             UpgradePauseController.Instance.CloseUpgradeMenu();
         }
+    }
+
+    public void GetBazooka()
+    {
+        ControllsScript.HasBazooka = true;
+        Bazooka.SetActive(true);
+    }
+
+    public void GetLaserGun()
+    {
+        ControllsScript.HasLaserGun = true;
+        LazerGun.SetActive(true);    
+    }
+
+    public void GetMachineGun()
+    {
+        MachineGun.SetActive(true);
+        ControllsScript.HasMachineGun = true;
     }
 }
