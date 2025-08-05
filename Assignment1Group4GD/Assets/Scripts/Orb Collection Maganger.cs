@@ -18,7 +18,7 @@ public class OrbCollectionMaganger : MonoBehaviour
     {
         OrbCollections.value = OrbsCollected;
         OrbCollections.maxValue = orbscollectedMax; // delete if needed
-        if (OrbsCollected == orbscollectedMax)
+        if (OrbsCollected >= orbscollectedMax)
         {
             Time.timeScale = 0;
             OrbsCollected -= orbscollectedMax; // Delete if necessary
@@ -26,10 +26,7 @@ public class OrbCollectionMaganger : MonoBehaviour
             uiManager.OpenUpgradeMenu();
             UpgradePanel.SetActive(true);
             UpgradePanel2.SetActive(true);
-            if (orbscollectedMax != 30)
-            {
-                orbscollectedMax += 15; // change to orbscollected -= 15 if game is not working;
-            }
+            orbscollectedMax += 15; // change to orbscollected -= 15 if game is not working;
         }
     }
 

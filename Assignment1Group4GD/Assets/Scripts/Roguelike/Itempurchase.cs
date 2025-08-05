@@ -47,7 +47,7 @@ public class Itempurchase : MonoBehaviour
                         break;
                     case Rogueitems.StatType.FireRate:
                         stats.ModifyStat("firerate", -itemInfo.statValue); // lower = faster
-                        stats.fireRate = Mathf.Max(0.05f, stats.fireRate);
+                        stats.fireRate = Mathf.Max(70f, stats.fireRate);
                         break;
                     case Rogueitems.StatType.MoveSpeed:
                         stats.ModifyStat("movespeed", itemInfo.statValue);
