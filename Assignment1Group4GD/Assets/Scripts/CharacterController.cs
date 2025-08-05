@@ -52,7 +52,10 @@ public class CharacterControls : MonoBehaviour
     [SerializeField] private float lineWidth = 0.1f; // Width of the line
 
     private LineRenderer lineRenderer;
-    private bool CanLaserShoot;
+    [SerializeField] private float ShootLimiter;
+    private bool isShooting;
+    public Slider ShootLimiterUI;
+    private bool canShoot;
     private void OnEnable()
     {
         controls = new Controls();
@@ -87,8 +90,38 @@ public class CharacterControls : MonoBehaviour
 
             // Enable the line renderer
         }
-       
+
+        
+
+        if (isShooting && ShootLimiter < 16)
+        {
+            ShootLimiter += Time.deltaTime;
+        }
+        else if (!isShooting && ShootLimiter > 0)
+        {
+
+            ShootLimiter -= Time.deltaTime;
+            ShootLimiter -= Time.deltaTime;
+
+
+        }
+        else if (isShooting && ShootLimiter >= 15)
+        {
+            CancelShoot();
+            StartCoroutine(ShootLimitercoolDown());
+
+        }
+
+        ShootLimiterUI.value = ShootLimiter;
     }
+
+    IEnumerator ShootLimitercoolDown()
+    {
+        yield return new WaitForSeconds(3);
+        isShooting = false;
+
+    }
+
 
     private void Awake()
     {
@@ -106,13 +139,15 @@ public class CharacterControls : MonoBehaviour
         lineRenderer.endColor = Color.blue;
         lineRenderer.startWidth = 0.3f;
         lineRenderer.endWidth = 0.3f;
-            lineRenderer.enabled = false;
+        lineRenderer.enabled = false;
         lineRenderer.positionCount = 2; // Need 2 points for a line
     }
 
 
     void Shoot()
     {
+        canShoot = true;
+        isShooting = true;
         StartCoroutine(Animations.SMGShoot());
         StartCoroutine(SMGSHoot());
         if (HasMachineGun)
@@ -174,8 +209,11 @@ public class CharacterControls : MonoBehaviour
                 }
             }
         }
-        yield return new WaitForSeconds(0.05f/stats.fireRate);
-        StartCoroutine(MachineGunShoot());
+        yield return new WaitForSeconds(0.05f / stats.fireRate);
+        if (canShoot)
+        {
+            StartCoroutine(MachineGunShoot());
+        }
     }
 
     IEnumerator BazookaShoot()
@@ -222,9 +260,12 @@ public class CharacterControls : MonoBehaviour
                 }
             }
         }
-        yield return new WaitForSeconds(2.4f/stats.fireRate);
+        yield return new WaitForSeconds(2.4f / stats.fireRate);
 
-        StartCoroutine(BazookaShoot());
+        if (canShoot)
+        {
+            StartCoroutine(BazookaShoot());
+        }
     }
 
     IEnumerator LaserShoot()
@@ -268,7 +309,11 @@ public class CharacterControls : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0.03f / stats.fireRate);
-        StartCoroutine(LaserShoot());
+
+        if (canShoot)
+        {
+            StartCoroutine(LaserShoot());
+        }
     }
     IEnumerator SMGSHoot()
     {
@@ -304,7 +349,7 @@ public class CharacterControls : MonoBehaviour
                     EnemyScript HealthSCript = Enemy.GetComponent<EnemyScript>();
                     HealthSCript.HP -= 3 + stats.baseDamage;
                     GameObject DamagerText = Instantiate(DamagerIndicatorText, hit.point, Quaternion.identity);
-                    DamagerText.transform.SetParent( hit.collider.gameObject.transform);
+                    DamagerText.transform.SetParent(hit.collider.gameObject.transform);
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
@@ -313,13 +358,17 @@ public class CharacterControls : MonoBehaviour
                 }
             }
         }
-        yield return new WaitForSeconds(0.2f/stats.fireRate);
-        StartCoroutine(SMGSHoot());
+        yield return new WaitForSeconds(0.2f / stats.fireRate);
+
+        if (canShoot)
+        {
+            StartCoroutine(SMGSHoot());
+        }
     }
     void CancelShoot()
     {
         StartCoroutine(Animations.SMGStop());
-        StopAllCoroutines();
+        canShoot = false;
         lineRenderer.enabled = false;
     }
 
@@ -329,7 +378,7 @@ public class CharacterControls : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 2))
         {
-           velocity.y = Mathf.Sqrt(stats.jumpHeight * -2f * gravity);
+            velocity.y = Mathf.Sqrt(stats.jumpHeight * -2f * gravity);
 
         }
     }
