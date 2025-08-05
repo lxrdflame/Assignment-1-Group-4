@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6928009700698410471}
   - component: {fileID: 6334042638022152562}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Head
   m_TagString: Head
   m_Icon: {fileID: 0}
@@ -116,6 +116,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 6a3e780e7d65c7544ab13e3e50fa4326, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 6a3e780e7d65c7544ab13e3e50fa4326, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8391222552659086748, guid: 6a3e780e7d65c7544ab13e3e50fa4326, type: 3}
       propertyPath: m_TagString
@@ -467,6 +471,7 @@ MonoBehaviour:
   HP: 220
   Player: {fileID: 0}
   agent: {fileID: 0}
+  Explotion: {fileID: 7545939599687491065, guid: 64a73d9a2319cbd4c82fe5972f697ec4, type: 3}
   Orb: {fileID: 2510824834110919357, guid: 5fe9375557c3bef4c81cad3cc94fc6d9, type: 3}
 --- !u!195 &6497389052043436591
 NavMeshAgent:

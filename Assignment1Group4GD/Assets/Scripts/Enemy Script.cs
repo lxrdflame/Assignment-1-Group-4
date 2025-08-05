@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.HID;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject Player;
     [SerializeField]
     private NavMeshAgent agent;
-
+    public GameObject Explotion;
 
     public GameObject Orb;
 
@@ -34,6 +35,8 @@ public class EnemyScript : MonoBehaviour
         if (HP <= 0)
         {
             Instantiate(Orb, transform.position, Quaternion.identity);
+            GameObject ExplotionParticle = Instantiate(Explotion, transform.position, Quaternion.identity);
+            Destroy(ExplotionParticle, 3);
             Destroy(gameObject);
         }
     }

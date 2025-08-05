@@ -32,7 +32,7 @@ public class CharacterControls : MonoBehaviour
     public GameObject BulletPrefab;
     public Transform holdingPosition;
     //Interaction 
-    public LayerMask InteractLayer;
+    public LayerMask ContactLayer;
     ShootingAniamtionsHandler Animations;
     public GameObject DamagerIndicatorText;
 
@@ -56,6 +56,9 @@ public class CharacterControls : MonoBehaviour
     private bool isShooting;
     public Slider ShootLimiterUI;
     private bool canShoot;
+
+    bool isDashing = false;
+
     private void OnEnable()
     {
         controls = new Controls();
@@ -69,7 +72,7 @@ public class CharacterControls : MonoBehaviour
         controls.Player.Jump.performed += ctx => Jump();
         controls.Player.Shoot.performed += ctx => Shoot();
         controls.Player.Shoot.canceled += ctx => CancelShoot();
-
+        controls.Player.Dash.performed += ctx => StartCoroutine(Dash());
 
     }
 
@@ -82,7 +85,7 @@ public class CharacterControls : MonoBehaviour
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Range))
+        if (Physics.Raycast(ray, out hit, Range, ContactLayer))
         {
             // Update line positions from start point to hit point
             lineRenderer.SetPosition(0, LaserGunPoint.position);
@@ -167,13 +170,25 @@ public class CharacterControls : MonoBehaviour
         }
     }
 
+    IEnumerator Dash()
+    {
+        if (!isDashing)
+        {
+            isDashing = true;
+            moveSpeed += 5;
+            yield return new WaitForSeconds(0.5f);
+            moveSpeed -= 5;
+            isDashing = false;
+        }
+
+    }
     IEnumerator MachineGunShoot()
     {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
 
 
-        if (Physics.Raycast(ray, out hit, Range))
+        if (Physics.Raycast(ray, out hit, Range, ContactLayer))
         {
 
             if (hit.collider != null)
@@ -226,7 +241,7 @@ public class CharacterControls : MonoBehaviour
         RaycastHit hit;
 
 
-        if (Physics.Raycast(ray, out hit, Range))
+        if (Physics.Raycast(ray, out hit, Range, ContactLayer))
         {
 
             if (hit.collider != null)
@@ -276,7 +291,7 @@ public class CharacterControls : MonoBehaviour
         RaycastHit hit;
 
 
-        if (Physics.Raycast(ray, out hit, Range))
+        if (Physics.Raycast(ray, out hit, Range, ContactLayer))
         {
 
             if (hit.collider != null)
@@ -323,7 +338,7 @@ public class CharacterControls : MonoBehaviour
         RaycastHit hit;
 
 
-        if (Physics.Raycast(ray, out hit, Range))
+        if (Physics.Raycast(ray, out hit, Range, ContactLayer))
         {
 
             if (hit.collider != null)

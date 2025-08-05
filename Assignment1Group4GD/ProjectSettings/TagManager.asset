@@ -7,11 +7,12 @@ TagManager:
   - Head
   - Body
   - Orb
+  - WalkingEnemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Contact
   - Water
   - UI
   - 
