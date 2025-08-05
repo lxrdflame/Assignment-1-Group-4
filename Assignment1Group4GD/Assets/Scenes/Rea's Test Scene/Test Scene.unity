@@ -9968,7 +9968,15 @@ MonoBehaviour:
   HasLaserGun: 0
   MachineGunPoint: {fileID: 625481743}
   BazookaGunPoint: {fileID: 670440550}
+  LaserGunPoint: {fileID: 928539960}
   BazookaBullet: {fileID: 1584507885093090616, guid: a6847a8f5ecded941bccd9cb0f484eb6, type: 3}
+  startPoint: {fileID: 0}
+  rayDistance: 100
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
+  lineWidth: 0.1
 --- !u!143 &735451901
 CharacterController:
   m_ObjectHideFlags: 0

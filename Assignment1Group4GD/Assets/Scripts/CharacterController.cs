@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
@@ -41,9 +42,17 @@ public class CharacterControls : MonoBehaviour
 
     //Gun Settings
     public bool HasMachineGun, HasBazooka, HasLaserGun;
-    public Transform MachineGunPoint, BazookaGunPoint;
+    public Transform MachineGunPoint, BazookaGunPoint, LaserGunPoint;
     public GameObject BazookaBullet;
 
+    [SerializeField] private Transform startPoint; // The transform to start the line from
+    [SerializeField] private float rayDistance = 100f; // Maximum raycast distance
+    [SerializeField] private LayerMask hitLayers; // Layers to detect with raycast
+    [SerializeField] private Color lineColor = Color.blue; // Color of the line
+    [SerializeField] private float lineWidth = 0.1f; // Width of the line
+
+    private LineRenderer lineRenderer;
+    private bool CanLaserShoot;
     private void OnEnable()
     {
         controls = new Controls();
@@ -54,7 +63,6 @@ public class CharacterControls : MonoBehaviour
         controls.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); // Update moveInput when movement input is performed
         controls.Player.Movement.canceled += ctx => moveInput = Vector2.zero; // Reset moveInput when movement input is canceled
 
-        controls.Player.Interact.performed += ctx => Interact();
         controls.Player.Jump.performed += ctx => Jump();
         controls.Player.Shoot.performed += ctx => Shoot();
         controls.Player.Shoot.canceled += ctx => CancelShoot();
@@ -67,6 +75,19 @@ public class CharacterControls : MonoBehaviour
         ApplyGravity();
         Move();
         LookAround();
+
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Range))
+        {
+            // Update line positions from start point to hit point
+            lineRenderer.SetPosition(0, LaserGunPoint.position);
+            lineRenderer.SetPosition(1, hit.point);
+
+            // Enable the line renderer
+        }
+       
     }
 
     private void Awake()
@@ -78,17 +99,17 @@ public class CharacterControls : MonoBehaviour
     private void Start()
     {
         Animations = GetComponent<ShootingAniamtionsHandler>();
+        // Create and configure the LineRenderer component
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.startColor = Color.blue;
+        lineRenderer.endColor = Color.blue;
+        lineRenderer.startWidth = 0.3f;
+        lineRenderer.endWidth = 0.3f;
+            lineRenderer.enabled = false;
+        lineRenderer.positionCount = 2; // Need 2 points for a line
     }
-    void Interact()
-    {
-       // Ray ray = new Ray(playerCamera.position, playerCamera.forward);
-        //RaycastHit hit;
 
-
-        /*if (Physics.Raycast(ray, out hit, PickupRange, InteractLayer))
-        {
-        }*/
-    }
 
     void Shoot()
     {
@@ -104,7 +125,8 @@ public class CharacterControls : MonoBehaviour
         }
         if (HasLaserGun)
         {
-            
+            StartCoroutine(LaserShoot());
+            lineRenderer.enabled = true;
         }
     }
 
@@ -135,6 +157,7 @@ public class CharacterControls : MonoBehaviour
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
                     Text.text = $"{6 + stats.baseDamage}";
+
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {
@@ -216,9 +239,6 @@ public class CharacterControls : MonoBehaviour
             if (hit.collider != null)
             {
 
-                GameObject Bullet = Instantiate(BulletPrefab, MachineGunPoint.position, Quaternion.identity);
-                BulletController controller = Bullet.GetComponent<BulletController>();
-                controller.hitPoint = hit.point;
 
                 if (hit.collider.CompareTag("Head"))
                 {
@@ -230,7 +250,7 @@ public class CharacterControls : MonoBehaviour
                     DamagerText.transform.rotation = transform.rotation;
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
-                    Text.text = $"{6 + stats.baseDamage}";
+                    Text.text = $"{3 + stats.baseDamage}";
                 }
                 else if (hit.collider.CompareTag("Body"))
                 {
@@ -243,11 +263,11 @@ public class CharacterControls : MonoBehaviour
                     Destroy(DamagerText, 1f);
                     TextMeshPro Text = DamagerText.GetComponent<TextMeshPro>();
                     Text.color = Color.yellow;
-                    Text.text = $"{3 + stats.baseDamage}";
+                    Text.text = $"{1 + stats.baseDamage}";
                 }
             }
         }
-        yield return new WaitForSeconds(0.05f / stats.fireRate);
+        yield return new WaitForSeconds(0.03f / stats.fireRate);
         StartCoroutine(LaserShoot());
     }
     IEnumerator SMGSHoot()
@@ -300,7 +320,7 @@ public class CharacterControls : MonoBehaviour
     {
         StartCoroutine(Animations.SMGStop());
         StopAllCoroutines();
-
+        lineRenderer.enabled = false;
     }
 
     void Jump()

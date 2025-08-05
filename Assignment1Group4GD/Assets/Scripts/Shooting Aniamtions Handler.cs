@@ -10,7 +10,7 @@ public class ShootingAniamtionsHandler : MonoBehaviour
     public IEnumerator SMGShoot()
     {
         NormalGunAnimator.SetBool("SMGShoot", true);
-        BazookaShoot.SetBool("BazookaShoot", true) ;
+        BazookaShoot.SetBool("BazookaShoot", true) ;    
         MachineGunRevolve.SetBool("Revolve", true);
         yield return new WaitForSeconds(0);
     }
