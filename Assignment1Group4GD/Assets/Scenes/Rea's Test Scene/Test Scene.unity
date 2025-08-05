@@ -6421,7 +6421,7 @@ MonoBehaviour:
   - {fileID: 1653403377}
   - {fileID: 514787642}
   SpawnRate: 1
-  EnemiesToSpawn: 1
+  EnemiesToSpawn: 30
   BossGlasses:
   - {fileID: 809699224}
   - {fileID: 310543411}
@@ -9944,7 +9944,6 @@ MonoBehaviour:
   hitLayers:
     serializedVersion: 2
     m_Bits: 8
-  lineColor: {r: 1, g: 0, b: 0, a: 1}
   lineWidth: 0.1
   ShootLimiter: 0
   ShootLimiterUI: {fileID: 1046055898}

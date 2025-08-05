@@ -48,7 +48,6 @@ public class CharacterControls : MonoBehaviour
     [SerializeField] private Transform startPoint; // The transform to start the line from
     [SerializeField] private float rayDistance = 100f; // Maximum raycast distance
     [SerializeField] private LayerMask hitLayers; // Layers to detect with raycast
-    [SerializeField] private Color lineColor = Color.blue; // Color of the line
     [SerializeField] private float lineWidth = 0.1f; // Width of the line
 
     private LineRenderer lineRenderer;
@@ -72,7 +71,7 @@ public class CharacterControls : MonoBehaviour
         controls.Player.Jump.performed += ctx => Jump();
         controls.Player.Shoot.performed += ctx => Shoot();
         controls.Player.Shoot.canceled += ctx => CancelShoot();
-        controls.Player.Dash.performed += ctx => StartCoroutine(Dash());
+        controls.Player.Dash.performed += ctx => DashUp();
 
     }
 
@@ -170,14 +169,21 @@ public class CharacterControls : MonoBehaviour
         }
     }
 
+    public void DashUp()
+    {
+        StartCoroutine(Dash());
+    }
+
     IEnumerator Dash()
     {
         if (!isDashing)
         {
+            Debug.Log("Dash");
+
             isDashing = true;
-            moveSpeed += 5;
+            stats.moveSpeed += 15;
             yield return new WaitForSeconds(0.5f);
-            moveSpeed -= 5;
+            stats.moveSpeed -= 15;
             isDashing = false;
         }
 
