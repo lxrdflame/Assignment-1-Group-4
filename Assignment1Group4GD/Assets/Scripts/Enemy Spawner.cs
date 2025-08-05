@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -8,7 +9,12 @@ public class EnemySpawner : MonoBehaviour
     public List<Transform> SpawnPoints;
     [SerializeField]
     private int SpawnRate, EnemiesToSpawn;
-    
+
+    public List<GameObject> BossGlasses;
+    public Rigidbody BossRigidBody;
+    public GameObject Boss;
+    public Transform StartPosition;
+    public NavMeshAgent BossNav;
 
     private void Start()
     {
@@ -23,7 +29,12 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(SpawnRate);
         }
 
-        
+        foreach(GameObject Glass in BossGlasses)
+        {
+            Glass.SetActive(false);
+        }
+        BossGlasses[1].SetActive(true);
+
         yield return new WaitForSeconds(10);
         for (int P = 0; P < EnemiesToSpawn; P++)
         {
@@ -33,6 +44,12 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(SpawnRate);
         }
 
+        foreach (GameObject Glass in BossGlasses)
+        {
+            Glass.SetActive(false);
+        }
+        BossGlasses[2].SetActive(true);
+
         yield return new WaitForSeconds(10);
         for (int L = 0; L < EnemiesToSpawn; L ++)
         {
@@ -40,5 +57,14 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy2 = Instantiate(Enemies[Random.Range(1, 2)], SpawnPoints[Random.Range(0, SpawnPoints.Count)].position, Quaternion.identity);
             yield return new WaitForSeconds(SpawnRate);
         }
+
+        foreach (GameObject Glass in BossGlasses)
+        {
+            Glass.SetActive(false);
+        }
+        BossNav.enabled = false;
+        Boss.transform.position = StartPosition.position;
+        BossRigidBody.isKinematic = false;
+        BossNav.enabled = true;
     }
 }
