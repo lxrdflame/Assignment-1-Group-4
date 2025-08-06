@@ -58,6 +58,8 @@ public class CharacterControls : MonoBehaviour
 
     bool isDashing = false;
 
+    public AudioSource Gun1, Gun2, Gun3, Gun4;
+
     private void OnEnable()
     {
         controls = new Controls();
@@ -145,6 +147,12 @@ public class CharacterControls : MonoBehaviour
         lineRenderer.positionCount = 2; // Need 2 points for a line
         isShooting = false;
 
+
+        Gun1.Stop();
+        Gun2.Stop();
+        Gun3.Stop();
+        Gun4.Stop();
+
     }
 
 
@@ -154,18 +162,26 @@ public class CharacterControls : MonoBehaviour
         isShooting = true;
         StartCoroutine(Animations.SMGShoot());
         StartCoroutine(SMGSHoot());
+        Gun1.Play();
+
         if (HasMachineGun)
         {
             StartCoroutine(MachineGunShoot());
+            Gun2.Play();
+
         }
         if (HasBazooka)
         {
             StartCoroutine(BazookaShoot());
+            Gun3.Play();
+
         }
         if (HasLaserGun)
         {
             StartCoroutine(LaserShoot());
             lineRenderer.enabled = true;
+            Gun4.Play();
+
         }
     }
 
@@ -394,6 +410,10 @@ public class CharacterControls : MonoBehaviour
         canShoot = false;
         lineRenderer.enabled = false;
         isShooting = false;
+        Gun1.Stop();
+        Gun2.Stop();
+        Gun3.Stop();
+        Gun4.Stop();
     }
 
     void Jump()

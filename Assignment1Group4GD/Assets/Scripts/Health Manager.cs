@@ -9,7 +9,14 @@ public class HealthManager : MonoBehaviour
     public Slider HealthSlider;
     public GameObject Explotion;
     public GameObject GameOverScreen;
+    public AudioSource ExplotionAudio;
 
+
+    private void Start()
+    {
+            ExplotionAudio.Stop();
+
+    }
     private void Update()
     {
         HealthSlider.value = Health;
@@ -27,6 +34,7 @@ public class HealthManager : MonoBehaviour
             Health -= 5;
             Destroy(hit.gameObject);
             GameObject ExplotionParticle = Instantiate(Explotion, hit.transform.position, Quaternion.identity);
+            ExplotionAudio.Play();
             Destroy(ExplotionParticle, 3);
         }
         else if (hit.CompareTag("EnemyBullet"))

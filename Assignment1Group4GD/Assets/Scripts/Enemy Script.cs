@@ -13,15 +13,20 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     private NavMeshAgent agent;
     public GameObject Explotion;
+    public AudioSource ExplotionAudio;
+    public GameObject BombExplotionGO;
 
     public GameObject Orb;
-
-    
+    HealthManager healthManager;
 
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
+        healthManager = Player.GetComponent<HealthManager>();
+
+
+
     }
 
     private void Update()
@@ -36,6 +41,7 @@ public class EnemyScript : MonoBehaviour
         {
             Instantiate(Orb, transform.position, Quaternion.identity);
             GameObject ExplotionParticle = Instantiate(Explotion, transform.position, Quaternion.identity);
+            healthManager.ExplotionAudio.Play();
             Destroy(ExplotionParticle, 3);
             Destroy(gameObject);
         }

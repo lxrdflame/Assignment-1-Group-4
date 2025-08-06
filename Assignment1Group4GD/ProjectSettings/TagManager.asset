@@ -9,6 +9,7 @@ TagManager:
   - Orb
   - WalkingEnemy
   - EnemyBullet
+  - BombAudio
   layers:
   - Default
   - TransparentFX
