@@ -8,10 +8,16 @@ public class HealthManager : MonoBehaviour
     public int Health;
     public Slider HealthSlider;
     public GameObject Explotion;
+    public GameObject GameOverScreen;
 
     private void Update()
     {
         HealthSlider.value = Health;
+
+        if (Health <= 0)
+        {
+            GameOverScreen.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter(Collider hit)
