@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -26,6 +27,17 @@ public class UIManager : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null); // Clear selection
         EventSystem.current.SetSelectedGameObject(button);
+    }
+
+    public void RestartGame()
+    {
+        string Scene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(Scene);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
 
