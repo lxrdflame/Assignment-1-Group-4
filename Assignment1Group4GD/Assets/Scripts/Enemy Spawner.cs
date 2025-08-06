@@ -39,8 +39,7 @@ public class EnemySpawner : MonoBehaviour
         for (int P = 0; P < EnemiesToSpawn; P++)
         {
             Debug.Log("nEW eNEMIES");
-            GameObject enemy = Instantiate(Enemies[Random.Range(0,1)], SpawnPoints[Random.Range(0, SpawnPoints.Count)].position, Quaternion.identity);
-            GameObject enemy2 = Instantiate(Enemies[Random.Range(0,1)], SpawnPoints[Random.Range(0, SpawnPoints.Count)].position, Quaternion.identity);
+            GameObject enemy = Instantiate(Enemies[Random.Range(1,1)], SpawnPoints[Random.Range(0, SpawnPoints.Count)].position, Quaternion.identity);
             yield return new WaitForSeconds(SpawnRate);
         }
 
@@ -53,8 +52,7 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(10);
         for (int L = 0; L < EnemiesToSpawn; L ++)
         {
-            GameObject enemy = Instantiate(Enemies[Random.Range(1, 2)], SpawnPoints[Random.Range(0, SpawnPoints.Count)].position, Quaternion.identity);
-            GameObject enemy2 = Instantiate(Enemies[Random.Range(1, 2)], SpawnPoints[Random.Range(0, SpawnPoints.Count)].position, Quaternion.identity);
+            GameObject enemy2 = Instantiate(Enemies[Random.Range(2, 2)], SpawnPoints[Random.Range(0, SpawnPoints.Count)].position, Quaternion.identity);
             yield return new WaitForSeconds(SpawnRate);
         }
 
@@ -62,6 +60,9 @@ public class EnemySpawner : MonoBehaviour
         {
             Glass.SetActive(false);
         }
+        yield return new WaitForSeconds(30);
+
+
         BossNav.enabled = false;
         Boss.transform.position = StartPosition.position;
         BossRigidBody.isKinematic = false;
