@@ -39,6 +39,12 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = isPaused ? 0 : 1;
         pausePanel.SetActive(isPaused);
 
+        if (!isPaused)
+{
+            instructionsPanel.SetActive(false);
+            optionsPanel.SetActive(false);
+        }
+
         orbManager.SetActive(false);
         healthBar.SetActive(false);
 
