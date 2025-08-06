@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartMenu.unity
+    guid: ff9e971d2ccec59489312e632215d778
+  - enabled: 1
+    path: Assets/Scenes/Rea's Test Scene/Game.unity
+    guid: 19c724cb29a92b6499b9f713e0dc0723
   m_configObjects: {}

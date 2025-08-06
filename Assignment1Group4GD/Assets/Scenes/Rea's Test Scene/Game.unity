@@ -8368,8 +8368,8 @@ MonoBehaviour:
   ExplotionAudio: {fileID: 0}
   BombExplotionGO: {fileID: 0}
   Orb: {fileID: 2510824834110919357, guid: 5fe9375557c3bef4c81cad3cc94fc6d9, type: 3}
-  WinPanel: {fileID: 0}
-  isBoss: 0
+  WinPanel: {fileID: 1383059294}
+  isBoss: 1
 --- !u!195 &430580577
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -15372,7 +15372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1383059295
 RectTransform:
   m_ObjectHideFlags: 0
