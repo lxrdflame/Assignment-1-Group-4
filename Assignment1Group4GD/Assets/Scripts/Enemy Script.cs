@@ -18,7 +18,9 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject Orb;
     HealthManager healthManager;
+    public GameObject WinPanel;
 
+    public bool isBoss;
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -44,6 +46,11 @@ public class EnemyScript : MonoBehaviour
             healthManager.ExplotionAudio.Play();
             Destroy(ExplotionParticle, 3);
             Destroy(gameObject);
+
+            if(isBoss)
+            {
+                WinPanel.SetActive(true);
+            }
         }
     }
 }
