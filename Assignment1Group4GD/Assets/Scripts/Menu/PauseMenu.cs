@@ -12,12 +12,15 @@ public class PauseMenu : MonoBehaviour
     public GameObject instructionsPanel;
 
     public GameObject orbManager;
+    public GameObject healthBar;
+
     private CharacterControls playerMovementScript;
     private bool isPaused = false;
 
     void Start()
     {
         orbManager.SetActive(true);
+        healthBar.SetActive(true);
         pausePanel.SetActive(false);
     }
 
@@ -35,16 +38,15 @@ public class PauseMenu : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0 : 1;
         pausePanel.SetActive(isPaused);
+
         orbManager.SetActive(false);
+        healthBar.SetActive(false);
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        if (instructionsPanel.activeInHierarchy)
-        {
-            pausePanel.SetActive(false);
-        }
         
-        if (optionsPanel.activeInHierarchy)
+        if (optionsPanel.activeInHierarchy || instructionsPanel.activeInHierarchy)
         {
             pausePanel.SetActive(false);
         }
@@ -53,6 +55,12 @@ public class PauseMenu : MonoBehaviour
         {
             instructionsPanel.SetActive(false);
             optionsPanel.SetActive(false);
+        }
+
+        if (!instructionsPanel.activeInHierarchy && !optionsPanel.activeInHierarchy && !pausePanel.activeInHierarchy)
+        {
+            orbManager.SetActive(true);
+            healthBar.SetActive(true);
         }
 
         // Disable player movement
@@ -70,7 +78,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         pausePanel.SetActive(false);
 
-        orbManager.SetActive(true);
+        
         
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
